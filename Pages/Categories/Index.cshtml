@@ -1,0 +1,56 @@
+﻿@page
+@model Buzea_Ana_Lab2.Pages.Categories.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryData.Categories.First().CategoryName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var category in Model.CategoryData.Categories) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => category.CategoryName)
+            </td>
+            <td>
+                  <a asp-page="./Index" asp-route-id="@category.ID">Select</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@if (Model.CategoryData.Books != null)
+{
+    <h3>Books in Selected Category</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model.CategoryData.Books)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author.FullName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
